@@ -6,42 +6,38 @@
 component {
 
 	// Module Properties
-	this.title 				= "@MODULE_NAME@";
+	this.title 				= "CBMailservices-SMTP";
 	this.author 			= "Ortus Solutions";
 	this.webURL 			= "https://www.ortussolutions.com";
-	this.description 		= "@MODULE_DESCRIPTION@";
+	this.description 		= "SMTP protocol for CBMailservices";
 	this.version 			= "@build.version@+@build.number@";
 
 	// Model Namespace
-	this.modelNamespace		= "@MODULE_SLUG@";
+	this.modelNamespace		= "cbmailservices-smtp";
 
 	// CF Mapping
-	this.cfmapping			= "@MODULE_SLUG@";
+	this.cfmapping			= "cbmailservices-smtp";
 
 	// Dependencies
-	this.dependencies 		= [];
+	this.dependencies = [ "cbjavaloader" ];
 
 	/**
 	 * Configure Module
 	 */
 	function configure(){
-		settings = {
-
-		};
+		settings = { libPath : modulePath & "/lib" };
 	}
 
 	/**
 	 * Fired when the module is registered and activated.
 	 */
 	function onLoad(){
-
+		wireBox.getInstance( "loader@cbjavaloader" ).appendPaths( settings.libPath );
 	}
 
 	/**
 	 * Fired when the module is unregistered and unloaded
 	 */
-	function onUnload(){
-
-	}
+	function onUnload(){}
 
 }

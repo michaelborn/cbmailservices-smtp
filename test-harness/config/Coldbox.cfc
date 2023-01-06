@@ -40,6 +40,26 @@
 			development = "localhost,127\.0\.0\.1"
 		};
 
+		moduleSettings = {
+			cbmailservices : {
+				defaultProtocol : "SMTP",
+				mailers : {
+					"SMTP" : {
+						class : "cbmailservices-smtp.models.SMTPProtocol",
+						properties : {
+							"host" : getSystemSetting( "SMTP_HOST" ),
+							"port" : getSystemSetting( "SMTP_PORT" ),
+							"authentication" : {
+								"enabled" : true,
+								"username" : getSystemSetting( "SMTP_USERNAME" ),
+								"password" : getSystemSetting( "SMTP_PASSWORD" )
+							}
+						}
+					}
+				}
+			}
+		};
+
 		// Module Directives
 		modules = {
 			// An array of modules names to load, empty means all of them

@@ -14,11 +14,26 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 	/*********************************** BDD SUITES ***********************************/
 
 	function run(){
-		describe( "MockData CFC", function(){
-			beforeEach( function( currentSpec ){
-			} );
+		describe( "Base module", function() {
+			it( "should have testable SMTP creds", function() {
+				expect( getUtil().getEnv( "SMTP_HOST" ) )
+					.notToBeNull()
+					.notToBe( "" );
 
-		} );
+				expect( getUtil().getEnv( "SMTP_PORT" ) )
+					.notToBeNull()
+					.notToBe( "" );
+
+				expect( getUtil().getEnv( "SMTP_USERNAME" ) )
+					.notToBeNull()
+					.notToBe( "" );
+
+				expect( getUtil().getEnv( "SMTP_PASSWORD" ) )
+					.notToBeNull()
+					.notToBe( "" );
+
+			});
+		});
 	}
 
 }

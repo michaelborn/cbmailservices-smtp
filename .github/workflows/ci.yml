@@ -1,4 +1,4 @@
-name: @MODULE_NAME@ CI
+name: CBMailservices-SMTP CI
 
 # Only on Development we build snapshots
 on:
@@ -8,7 +8,7 @@ on:
       - master
 
 env:
-  MODULE_ID: @MODULE_SLUG@
+  MODULE_ID: cbmailservices-smtp
 
 jobs:
   #############################################
@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: 0
 
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.9.0
         with:
           distribution: "adopt"
           java-version: "11"
@@ -71,33 +71,33 @@ jobs:
 
       - name: Upload Build Artifacts
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: ${{ env.MODULE_ID }}
           path: |
             .artifacts/**/*
 
-      - name: Upload Binaries to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read
-        env:
-          AWS_S3_BUCKET: "downloads.ortussolutions.com"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
-          SOURCE_DIR: ".artifacts/${{ env.MODULE_ID }}"
-          DEST_DIR: "ortussolutions/coldbox-modules/${{ env.MODULE_ID }}"
+      # - name: Upload Binaries to S3
+      #   uses: jakejarvis/s3-sync-action@master
+      #   with:
+      #     args: --acl public-read
+      #   env:
+      #     AWS_S3_BUCKET: "downloads.ortussolutions.com"
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
+      #     SOURCE_DIR: ".artifacts/${{ env.MODULE_ID }}"
+      #     DEST_DIR: "ortussolutions/coldbox-modules/${{ env.MODULE_ID }}"
 
-      - name: Upload API Docs to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read
-        env:
-          AWS_S3_BUCKET: "apidocs.ortussolutions.com"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
-          SOURCE_DIR: ".tmp/apidocs"
-          DEST_DIR: "coldbox-modules/${{ env.MODULE_ID }}/${{ env.VERSION }}"
+      # - name: Upload API Docs to S3
+      #   uses: jakejarvis/s3-sync-action@master
+      #   with:
+      #     args: --acl public-read
+      #   env:
+      #     AWS_S3_BUCKET: "apidocs.ortussolutions.com"
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
+      #     SOURCE_DIR: ".tmp/apidocs"
+      #     DEST_DIR: "coldbox-modules/${{ env.MODULE_ID }}/${{ env.VERSION }}"
 
       - name: Publish To ForgeBox
         run: |
@@ -116,3 +116,8 @@ jobs:
           SLACK_TITLE: "${{ env.MODULE_ID }} Build"
           SLACK_USERNAME: CI
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Show Server Log On Failures
+        if: ${{ failure() }}
+        run: |
+          box cat `box system-log`

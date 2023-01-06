@@ -1,52 +1,40 @@
-# Ortus ColdBox Module Template
+# CBMailservices-SMTP
 
-This template can be used to create Ortus based ColdBox Modules.  To use, just click the `Use this Template` button in the github repository: https://github.com/coldbox-modules/module-template and run the setup task from where you cloned it.
+based off of [Simple Java Mail](https://www.simplejavamail.org/).
+
+## Installation
 
 ```bash
-box task run taskFile=build/SetupTemplate
+box install cbmailservices-smtp
 ```
 
-The `SetupTemplate` task will ask you for your module name, id and description and configure the template for you! Enjoy!
+## Configuration
 
-## Directory Structure
+## Usage
 
-The root of the module is the root of the repository. Add all the necessary files your module will need.
+## Contributions
 
-* `.github/workflows` - These are the github actions to test and build the module via CI
-* `build` - This is the CommandBox task that builds the project.  Only modify if needed.  Most modules will never modify it. (Modify if needed)
-* `test-harness` - This is a ColdBox testing application, where you will add your testing files, specs etc.
-* `.cfformat.json` - A CFFormat using the Ortus Standards
-* `.cflintrc` - A CFLint configuration file according to Ortus Standards
-* `.editorconfig` - Smooth consistency between editors
-* `.gitattributes` - Git attributes
-* `.gitignore` - Basic ignores. Modify as needed.
-* `.markdownlint.json` - A linting file for markdown docs
-* `box.json` - The box.json for YOUR module.  Modify as needed.
-* `changelog.md` - A nice changelog tracking file
-* `ModuleConfig.cfc` - Your module's configuration. Modify as needed.
-* `readme.md` - Your module's readme. Modify as needed.
-* `server-xx@x.json` - A set of json files to configure the major engines your modules supports.
+## Thanks
 
-## Test Harness
+All original functionality courtesy of [Simple Java Mail](https://www.simplejavamail.org/).
 
-The test harness is created to bootstrap your working module into the application `afterAspectsLoad`.  This is done in the `config/ColdBox.cfc`.  It includes some key features:
+## License
 
-* `config` - Modify as needed
-* `tests` - All your testing specs should go here.  Please notice the commented out ORM fixtures.  Enable them if your module requires ORM
-* `.cfconfig.json` - A prepared cfconfig json file so your engine data is consistent.  Modify as needed.
-* `.env.sample` - An environment property file sample.  Copy and create a `.env` if your app requires it.
+Apache License, Version 2.0.
 
+> The ColdBox Websites, logo and content have a separate license and they are a separate entity.
 
-## API Docs
+## The Good News
 
-The build task will take care of building API Docs using DocBox for you but **ONLY** for the `models` folder in your module.  If you want to document more then make sure you modify the `build/Build.cfc` task.
+> For all have sinned, and come short of the glory of God ([Romans 3:23](https://www.kingjamesbibleonline.org/Romans-3-23/))
 
-## Github Actions Automation
+> But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us. ([Romans 5:8](https://www.kingjamesbibleonline.org/Romans-5-8))
 
-The github actions will clone, test, package, deploy your module to ForgeBox and the Ortus S3 accounts for API Docs and Artifacts.  So please make sure the following environment variables are set in your repository. ** Please note that most of them are already defined at the org level **
+> That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved. ([Romans 10:9](https://www.kingjamesbibleonline.org/Romans-10-9/))
 
-* `FORGEBOX_TOKEN` - The Ortus ForgeBox API Token
-* `AWS_ACCESS_KEY` - The travis user S3 account
-* `AWS_ACCESS_SECRET` - The travis secret S3
+## Repository
 
-> Please contact the admins in the `#infrastructure` channel for these credentials if needed
+Copyright 2022 (and on) - [Michael Born](https://michaelborn.me)
+
+* [Homepage](https://github.com/michaelborn/cbmailservices-smtp)
+* [Issue Tracker](https://github.com/michaelborn/cbmailservices-smtp/issues)
